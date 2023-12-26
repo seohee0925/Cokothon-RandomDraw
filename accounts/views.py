@@ -49,6 +49,7 @@ def login(request):
     passworddata =  requestdata['password']
 
     request.session['email'] = emaildata
+    
 
     try:
         account = get_object_or_404(Accounts, email = emaildata, password = passworddata)
