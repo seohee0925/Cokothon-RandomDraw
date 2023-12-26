@@ -5,6 +5,8 @@
     <title>Wrtie</title>
 
     <script>
+        var imgUrl = "";
+
         // 이미지 프리뷰
         function showImagePreview(input) {
             var preview = document.getElementById('img-preview');
@@ -14,6 +16,7 @@
                 var reader = new FileReader();
                 reader.onload = function (e) {
                     preview.src = e.target.result;
+                    imgUrl = e.target.result;
                 };
                 reader.readAsDataURL(files[0]);
             } else {
@@ -28,6 +31,29 @@
     
             document.getElementById("char_cnt").innerHTML = charCount + "/1000";
           }
+
+        // Fetch API를 사용하여 서버에 데이터 전송
+        function sendToServer() {
+            var textareaText = document.getElementById("custom-textarea").value;
+            fetch('http://192.168.140.251/8080/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: 
+                    JSON.stringify({
+                        img: imgUrl,
+                        text: textareaText
+                    })
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('서버 응답: ', data);
+            })
+            .catch(error => {
+                console.error('서버로 전송하는 중 오류 발생: ', error);
+            });
+        }
     </script>
 </head>
 <body>
@@ -47,20 +73,20 @@
         </label>
     </div>  
 
-    <button type="button" onclick="alert('클릭!')">
+    <div class="filebox">
+        <label for="file">이미지 올리기</label> 
+        <input type="file" id="file" onchange="showImagePreview(this);" >
+    </div>
+    <!-- <img id="img-preview" height=15%> -->
+    <img id="img-preview" src="img/write_retro_icon.png" height=15%>
+
+    <button type="button" onclick="sendToServer()">
         <!-- <p id="write-btn-send" style="z-index: 3; position: absolute; top: 88.7%;">보내기</p> -->
         <p id="write-btn-send" style="z-index: 3; position: absolute; top: 79.8%;">보내기</p>
         <img id="write-btn-send" src="img/write_btn_send.png" >
     </button>
 
     <div>
-
-        <div class="filebox">
-            <label for="file">이미지 올리기</label> 
-            <input type="file" id="file" onchange="showImagePreview(this);" >
-        </div>
-        <!-- <img id="img-preview" height=15%> -->
-        <img id="img-preview" src="img/write_retro_icon.png" height=15%>
 
         <div>
             <p id="current-date"></p>
