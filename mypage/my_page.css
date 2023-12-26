@@ -35,7 +35,7 @@
   .tabmenu ul li{
     display:  inline-block;
     width:33.33%; 
-    float:left;  
+    float: left; 
     text-align:center; 
     background-color :rgba(132,137,97,0.5);
     line-height:40px;
