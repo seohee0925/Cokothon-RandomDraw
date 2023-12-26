@@ -18,11 +18,9 @@ from django.contrib import admin
 from django.urls import path, include
 from accounts import urls as accounts_url
 from main import urls as main_url
-from mypage import urls as mypage_url
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include(accounts_url)),
     path('main/', include(main_url)),
-    path('mypage', include(mypage_url)),
 ]

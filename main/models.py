@@ -2,6 +2,7 @@ from django.db import models
 # from .models import User
 
 class Capsule(models.Model):
+    email = models.ForeignKey('accounts.Accounts', on_delete=models.CASCADE)
     content = models.TextField(verbose_name='내용')
     picture = models.ImageField(verbose_name='사진')
     
@@ -21,3 +22,11 @@ class Capsule(models.Model):
     destination = models.CharField(max_length=7, choices=DESTINATION_CHOICES)
     write_date = models.DateTimeField(auto_now=True)
     open_date = models.CharField(max_length=6, choices=OPEN_DATE_CHOICES)
+
+class picked_capsule(models.Model):
+    account_info_email = models.CharField(max_length=100)
+    picked_capsule_id = models.AutoField(primary_key=True)
+    info_write_date = models.DateField()
+    info_open_date = models.DateField()
+    info_content = models.TextField()
+    info_picture = models.ImageField()
