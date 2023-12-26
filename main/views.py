@@ -10,20 +10,43 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from .serializers import CapsuleSerializer
+from rest_framework import viewsets
+from rest_framework.views import APIView
 
-@api_view(['POST'])
-# @permission_classes([IsAuthenticated])
-def write_capsule(request):
-    user_email = request.session['email']
-    user = Accounts.objects.get(email=user_email)
 
-    serializer = CapsuleSerializer(data=request.data, files=request.FILES)
-    
-    if serializer.is_valid():
-        serializer.save(user=user, email=user_email)
+class CapsuleViewSet(APIView):
+    queryset = Capsule.objects.all() 
+    serializer_class = CapsuleSerializer
+
+    def get(self, request, **kwargs): 
+        queryset = Capsule.objects.all()
+        queryset_serializer = CapsuleSerializer(queryset, many=True)
+        return Response(queryset_serializer.data)
+
+    def post(self, request):
+        user_email = "appleid5@naver.com"
+
+        try:
+            user = Accounts.objects.get(email=user_email)
+        except Accounts.DoesNotExist:
+            return Response("User not found", status=404)
+        
+        serializer = CapsuleSerializer(data=request.data, context={'user_email': user_email})
+
+        if serializer.is_valid():
+            serializer.save() 
+            return Response(serializer.data)
+        
+        return Response(serializer.errors, status=400)
+
+
+    def perform_create(self, serializer):
+        # Serializer의 save 메서드를 오버라이드하여 user_email을 저장
+        serializer.save(email=self.request.data.get('email'))
+
+    def list(self, request):
+        serializer = CapsuleSerializer(self.queryset, many=True)
         return Response(serializer.data)
-    
-    return Response(serializer.errors, status=400)
     
     # if request.method == 'POST':
     #     form = CapsuleCreateForm(request.POST, request.FILES)
@@ -37,16 +60,14 @@ def write_capsule(request):
     #     form = CapsuleCreateForm()
     # return render(request, 'write_capsule.html', {'form': form})
 
-@login_required
-def show_capsule(request, id): # 사용자 제외 랜덤
+def show_capsule(request): 
     if request.method == 'GET':
-        user_email = request.session['email']
-        user = Accounts.objects.get(email=user_email)
-
-        capsules_exclude_user = Accounts.objects.exclude(user=user)
-        random_capsule = random.choice(capsules_exclude_user)
-
-        return JsonResponse({'id' : random_capsule.id, 'content':random_capsule.content}, json_dumps_params={'ensure_ascii':False}, content_type = 'application/json; charest=utf-8')
+        # user_email = request.session['email']
+        # user = Accounts.objects.get(email=user_email)
+        user_email = "app@naver.com"
+        random_capsule = Capsule.objects.exclude(email=user_email)
+        print(random_capsule)
+        return JsonResponse({'id': random_capsule.id, 'content': random_capsule.content}, json_dumps_params={'ensure_ascii': False}, content_type='application/json; charset=utf-8')
 
 def show_all_picked_capsule(request):
     # user_email = request.session['email']
