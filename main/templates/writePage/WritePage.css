@@ -36,7 +36,7 @@ p {
     /* top: 53%;
     left: 80%; */
     top: 59%;
-    left: 82.5%;
+    left: 83%;
     transform: translate(-50%, -50%);
     z-index: 3;
     cursor: pointer;
@@ -64,7 +64,7 @@ p {
     left: 77.5%; */
     position: absolute;
     top: 47%;
-    left: 82.5%;
+    left: 83%;
     transform: translate(-50%, -50%);
     z-index: 4;
     max-width: 90%;
@@ -139,7 +139,7 @@ p {
     /* top: 87%;
     left: 45%; */
     top: 18%;
-    left: 82.5%;
+    left: 82%;
     transform: translate(-50%, -50%);
     z-index: 2;
     cursor: pointer;
@@ -150,7 +150,7 @@ p {
     /* top: 87%;
     left: 35%; */
     top: 28%;
-    left: 82.5%;
+    left: 82%;
     transform: translate(-50%, -50%);
     z-index: 2;
     cursor: pointer;
@@ -158,26 +158,26 @@ p {
 
 .text-over-image {  /* 라디오 버튼 글자 */
     position: absolute;
-    top: 48%;
-    left: 50%;
+    top: 50%;
+    left: 60%;
     transform: translate(-50%, -50%);
     z-index: 1;
     color: #848961;
     font-size: 12px;
 }
 
-input[type=radio]:checked + label {  /* 라디오 버튼 클릭 시 */
+input[type=radio]:checked + .text-over-image {  /* 라디오 버튼 글자 클릭 시 */
     color: #FFF;
 }
 
 #write-btn-send {  /* 보내기 */
-    width: 5%;
-    height: 10%;
+    width: 6%;
+    height: 12%;
     position: absolute;
     /* top: 87%;
     left: 75%; */
     top: 77%;
-    left: 82.5%;
+    left: 83%;
     transform: translate(-50%, -50%);
     z-index: 2;
     cursor: pointer;

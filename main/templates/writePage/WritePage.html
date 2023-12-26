@@ -5,13 +5,7 @@
     <title>Wrtie</title>
 
     <script>
-        function clickRadio(id) {
-            var radio = document.getElementById(id);
-            if (radio) {
-                radio.click();
-            }
-        }
-
+        // 이미지 프리뷰
         function showImagePreview(input) {
             var preview = document.getElementById('img-preview');
             var files = input.files;
@@ -37,62 +31,60 @@
     </script>
 </head>
 <body>
-    <div id="container">
-        <link rel="stylesheet" href="WritePage.css">
-        <h1>추억 보내기</h1>
+    <link rel="stylesheet" href="WritePage.css">
+    <h1>추억 보내기</h1>
+    <div>
+        <label for="write-btn-2" class="radio-label-2">
+            <input type="radio" id="write-btn-2" name="who" style="opacity: 0;" />
+            <div class="text-over-image">익명</div>
+            <img class="radio-btn" src="img/write_btn_2.png" alt="익명">
+        </label>
+
+        <label for="write-btn-1" class="radio-label-1">
+            <input type="radio" id="write-btn-1" name="who" style="opacity: 0;"/>
+            <div class="text-over-image">나에게</div>
+            <img class="radio-btn" src="img/write_btn_1.png" alt="나에게">
+        </label>
+    </div>  
+
+    <button type="button" onclick="alert('클릭!')">
+        <!-- <p id="write-btn-send" style="z-index: 3; position: absolute; top: 88.7%;">보내기</p> -->
+        <p id="write-btn-send" style="z-index: 3; position: absolute; top: 79.8%;">보내기</p>
+        <img id="write-btn-send" src="img/write_btn_send.png" >
+    </button>
+
+    <div>
+
+        <div class="filebox">
+            <label for="file">이미지 올리기</label> 
+            <input type="file" id="file" onchange="showImagePreview(this);" >
+        </div>
+        <!-- <img id="img-preview" height=15%> -->
+        <img id="img-preview" src="img/write_retro_icon.png" height=15%>
+
         <div>
-            <input type="radio" id="write-btn-2" name="who" style="opacity: 0;" onclick="alert('클릭!')" />
-            <label for="write-btn-2" class="radio-label-2" onclick="clickRadio('write-btn-2');">
-                <div class="text-over-image">익명</div>
-                <img class="radio-btn" src="img/write_btn_2.png" alt="익명">
-            </label>
-
-            <input type="radio" id="write-btn-1" name="who" style="opacity: 0;" onclick="alert('클릭!')" />
-            <label for="write-btn-1" class="radio-label-1" onclick="clickRadio('write-btn-1');">
-                <div class="text-over-image">나에게</div>
-                <img class="radio-btn" src="img/write_btn_1.png" alt="나에게">
-            </label>
-        </div>  
-
-        <button type="button" onclick="alert('클릭!')">
-            <!-- <p id="write-btn-send" style="z-index: 3; position: absolute; top: 88.7%;">보내기</p> -->
-            <p id="write-btn-send" style="z-index: 3; position: absolute; top: 79%;">보내기</p>
-            <img id="write-btn-send" src="img/write_btn_send.png" >
-        </button>
+            <p id="current-date"></p>
+            <textarea id="custom-textarea" maxlength="1000" placeholder="추억을 입력해주세요." oninput="countChars()"></textarea>
+            <p id="char_cnt">0/1000</p>
+            <script>
+                date = new Date();
+                year = date.getFullYear();
+                month = date.getMonth() + 1;
+                day = date.getDate();
+                var inputValue = year + "/" + month + "/" + day;
+                document.getElementById("current-date").innerText = inputValue;  // <p> 태그에 값을 넣기
+            </script>
+        </div>
 
         <div>
+            <img id="write-white" src="img/write_white.png" >
+        </div>
 
-            <div class="filebox">
-                <label for="file">이미지 올리기</label> 
-                <input type="file" id="file" onchange="showImagePreview(this);" >
-            </div>
-            <!-- <img id="img-preview" height=15%> -->
-            <img id="img-preview" src="img/write_retro_icon.png" height=15%>
-
-            <div>
-                <p id="current-date"></p>
-                <textarea id="custom-textarea" maxlength="1000" placeholder="추억을 입력해주세요." oninput="countChars()"></textarea>
-                <p id="char_cnt">0/1000</p>
-                <script>
-                    date = new Date();
-                    year = date.getFullYear();
-                    month = date.getMonth() + 1;
-                    day = date.getDate();
-                    var inputValue = year + "/" + month + "/" + day;
-                    document.getElementById("current-date").innerText = inputValue;  // <p> 태그에 값을 넣기
-                </script>
-            </div>
-
-            <div>
-                <img id="write-white" src="img/write_white.png" >
-            </div>
-
-            <div>
-                <img id="write-game" src="img/write_game.png" >
-            </div>
-
+        <div>
+            <img id="write-game" src="img/write_game.png" >
         </div>
 
     </div>
+
 </body>
 </html>
