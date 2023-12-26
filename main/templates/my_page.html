@@ -4,35 +4,73 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>내 추억 저장소</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
     <link rel="stylesheet" href="../my_page.css">
   </head>
 
   <body>
   <h1>내 추억 저장소</h1>
   <div id="user-nickname">(별명)</div>
-    <div class="tabmenu out-tabmenu">
-        <ul>
-          <li id="tab1" class="btnCon"> 
-        
-            <input type="radio" checked name="tabmenu" id="tabmenu1">
-            <label for="tabmenu1">나의 추억</label>
-            <div class="tabCon" >
-                <div class="default-message" id="test1">나의 추억을 만들고 일정 시간 후에 확인해보세요.</div>
-                
-                <button type="button" id="btn">버튼</button>
-                </div>
+  <div class="tabmenu out-tabmenu">
+    <ul>
+      <li id="tab1" class="btnCon"> 
+    
+        <input type="radio" checked name="tabmenu" id="tabmenu1">
+        <label for="tabmenu1">나의 추억</label>
+        <div class="tabCon" >
+            <div class="default-message" id="test1">나의 추억을 만들고 일정 시간 후에 확인해보세요.</div>
             
-          </li>
-          <li id="tab2" class="btnCon">
-            <input type="radio" name="tabmenu" id="tabmenu2">
-            <label for="tabmenu2">뽑은 추억</label>
-            <div class="tabCon" >
-                <div class="default-message" id="test2">다른 사용자의 추억을 뽑아보세요.</div>
-                <button type="button" id="btn2">버튼</button>
+            <button type="button" id="btn">버튼</button>
             </div>
-          </li>
-        </ul>
+        
+      </li>
+      <li id="tab2" class="btnCon">
+        <input type="radio" name="tabmenu" id="tabmenu2">
+        <label for="tabmenu2">뽑은 추억</label>
+        <div class="tabCon" >
+            <div class="default-message" id="test2">다른 사용자의 추억을 뽑아보세요.</div>
+            <button type="button" id="btn2">버튼</button>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+
+  <div class="modal fade" id="timeCapsuleModalToggle" aria-hidden="true" aria-labelledby="timeCapsuleModalToggleLabel" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4>20XX.XX.XX X요일</h4>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="capsule-photo-container"><img src="." alt="추억 사진" /></div>
+          
+          <button class="arrow-button" data-bs-target="#timeCapsuleModalToggle2" data-bs-toggle="modal">
+            <i class="arrow right"></i></button>
+        </div>
       </div>
+    </div>
+  </div>
+
+  
+  <div class="modal fade" id="timeCapsuleModalToggle2" aria-hidden="true" aria-labelledby="timeCapsuleModalToggleLabel2" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4>20XX.XX.XX X요일</h4>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <button class="arrow-button" data-bs-target="#timeCapsuleModalToggle" data-bs-toggle="modal">
+            <i class="arrow left"></i></button>
+          추억 내용 추억 내용 추억 내용 추억 내용 추억 내용 추억 내용 추억 내용 추억 내용 추억 내용 추억 내용 추억 내용 추억 내용
+          
+        </div>
+        
+      </div>
+    </div>
+  </div>
   
     
   <script>
@@ -43,18 +81,19 @@
         const capsuleImages = ["1-locked.png", "2-locked.png"];
         const chosenImage = capsuleImages[i];
 
-        
+        const capsuleContainerButton = document.createElement('button');
+        capsuleContainerButton.className = 'transparent-button';
+        capsuleContainerButton.setAttribute('data-bs-target', '#timeCapsuleModalToggle');
+        capsuleContainerButton.setAttribute('data-bs-toggle','modal');
+        capsuleContainerButton.style.display = 'inline-block';
+        capsuleContainerButton.style.flexDirection = 'column';
+        capsuleContainerButton.style.textAlign = 'center';
+        capsuleContainerButton.style.width = '100px';
+        capsuleContainerButton.style.marginRight = '15px';
+        capsuleContainerButton.style.marginBottom = '15px';
+        capsuleContainerButton.style.cursor = 'pointer';
+
         const capsuleContainer = document.createElement('span');
-        capsuleContainer.style.display = 'inline-block';
-        capsuleContainer.style.flexDirection = 'column';
-        capsuleContainer.style.textAlign = 'center';
-        capsuleContainer.style.width = '100px';
-        capsuleContainer.style.marginRight = '15px';
-        capsuleContainer.style.marginBottom = '15px';
-        capsuleContainer.style.cursor = 'pointer';
-        capsuleContainer.setAttribute('data-bs-toggle', 'tooltip');
-        capsuleContainer.setAttribute('data-bs-placement', 'bottom');
-        capsuleContainer.setAttribute('data-bs-title', 'Tooltip on bottom');
 
         const capsule = document.createElement('img');
         capsule.src = `../../capsule${chosenImage}`;
@@ -62,10 +101,10 @@
         
         
         const createdDate = document.createTextNode('20XX.XX.XX');  // 작성 날짜 받아오기
-
-        capsuleContainer.appendChild(capsule);
-        capsuleContainer.appendChild(createdDate);
-        tabCon.appendChild(capsuleContainer);
+        capsuleContainerButton.appendChild(capsule);
+        capsuleContainerButton.appendChild(createdDate);
+        capsuleContainerButton.appendChild(capsuleContainer);
+        tabCon.appendChild(capsuleContainerButton);
 
         i = (i + 1) % 2;
         if (tabCon.querySelector('img')) {
@@ -77,5 +116,6 @@
     
 
   </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 </body>
 </html>
