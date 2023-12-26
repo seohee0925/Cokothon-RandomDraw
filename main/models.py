@@ -2,7 +2,7 @@ from django.db import models
 # from .models import User
 
 class Capsule(models.Model):
-    email = models.ForeignKey('accounts.Accounts', on_delete=models.CASCADE)
+    email = models.EmailField()
     content = models.TextField(verbose_name='내용')
     picture = models.ImageField(verbose_name='사진')
     
