@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Wrtie</title>
+</head>
+<body>
+    <link rel="stylesheet" href="WritePage.css">
+    <h1>추억 보내기</h1>
+    <div>
+        <input type="radio" id="write_btn_2" name="who" style="z-index: 3; opacity: 0; position: absolute; top: 88.7%;" /> <label for="write_btn_2">익명으로</label>
+        <img id="write_btn_2" src="img/write_btn_2.png" >
+
+        <input type="radio" id="write_btn_1" name="who" style="z-index: 3; opacity: 0;" /> <label for="write_btn_1">나에게</label>
+        <img id="write_btn_1" src="img/write_btn_1.png" >
+    </div>   
+    <div>
+        <button type="button" onclick="alert('클릭!')">
+            <p id="write_btn_send" style="z-index: 3; position: absolute; top: 88.7%;">보내기</p>
+            <img id="write_btn_send" src="img/write_btn_send.png" >
+        </button>
+    </div>
+
+    <div>
+
+        <div>
+            <input type="file" id="img_upload" accept="image/*" required multiple>
+
+        </div>
+
+        <div>
+            <p id="current_date"></p>
+            <textarea id="custom_textarea"></textarea>
+            <script>
+                date = new Date();
+                year = date.getFullYear();
+                month = date.getMonth() + 1;
+                day = date.getDate();
+                var inputValue = year + "/" + month + "/" + day;
+                document.getElementById("current_date").innerText = inputValue;  // <p> 태그에 값을 넣기
+            </script>
+        </div>
+
+        <div>
+            <img id="write_white" src="img/write_white.png" >
+        </div>
+
+        <div>
+            <img id="write_game" src="img/write_game.png" >
+        </div>
+    </div>
+
+</body>
+</html>

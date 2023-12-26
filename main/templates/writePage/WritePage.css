@@ -1,0 +1,122 @@
+@font-face { font-family: 'yangjin'; src: url('https://cdn.jsdelivr.net/gh/supernovice-lab/font@0.9/yangjin.woff') format('woff'); font-weight: 100; font-style: normal; }
+
+* {
+	font-family: 'yangjin';
+}
+
+body {
+    background-color: #DACAA9;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+h1 {
+    letter-spacing:.5rem;
+    font-size: 50px;
+    position: absolute;
+    left: 8%;
+    color: #C31610;
+    writing-mode: vertical-rl;
+  }
+
+p {
+    color: #FFF;
+}
+
+input[type=radio] {
+    color: #848961;
+    position: absolute; top: 88.7%;
+}
+
+input[type=radio]:checked + label {
+    color: #FFF;
+}
+
+#img_upload {
+    position: absolute;
+    top: 46%;
+    left: 85%;
+    transform: translate(-50%, -50%);
+    z-index: 3;
+}
+
+#current_date {
+    position: absolute;
+    top: 7%;
+    left: 27%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+}
+
+#custom_textarea {
+    width: 49%;
+    height: 65%;
+    position: absolute;
+    top: 43%;
+    left: 55%;
+    transform: translate(-65%, -45%);
+    /* border-radius: 1%; */
+    font-size: 13px;
+    background-color: transparent;
+    resize: none;
+    color: black;
+    border: none;
+    outline: none;
+    z-index: 3;
+  }
+
+#write_white {
+    width: 65%;
+    height: 68%;
+    position: absolute;
+    top: 46%;
+    left: 55%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+}
+
+#write_game {
+    width: 70%;
+    height: 90%;
+    position: absolute;
+    top: 50%;
+    left: 55%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+}
+
+#write_btn_1 {
+    width: 5%;
+    height: 5%;
+    position: absolute;
+    top: 87%;
+    left: 40%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+}
+
+#write_btn_2 {
+    width: 5%;
+    height: 5%;
+    position: absolute;
+    top: 87%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+}
+
+#write_btn_send {
+    width: 5%;
+    height: 10%;
+    position: absolute;
+    top: 87%;
+    left: 80%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+}
+
+
