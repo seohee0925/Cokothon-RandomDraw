@@ -10,7 +10,13 @@
 
   <body>
   <h1>내 추억 저장소</h1>
-  <div id="user-nickname">(별명)</div>
+  <div id="user-nickname">(별명)
+    <script>
+      document.getElementById('user-nickname').textContent = username;
+    </script>
+  </div>
+  
+
   <div class="tabmenu out-tabmenu">
     <ul>
       <li id="tab1" class="btnCon"> 
@@ -19,10 +25,8 @@
         <label for="tabmenu1">나의 추억</label>
         <div class="tabCon" >
             <div class="default-message" id="test1">나의 추억을 만들고 일정 시간 후에 확인해보세요.</div>
-            
             <button type="button" id="btn">버튼</button>
             </div>
-        
       </li>
       <li id="tab2" class="btnCon">
         <input type="radio" name="tabmenu" id="tabmenu2">
@@ -40,11 +44,11 @@
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
-          <h4>20XX.XX.XX X요일</h4>
+          <h4 class="created-date">(20XX.XX.XX X요일)</h4>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <div class="capsule-photo-container"><img src="." alt="추억 사진" /></div>
+          <div class="capsule-photo-container"><img class="capsule-photo" src="." alt="추억 사진" /></div>
           
           <button class="arrow-button" data-bs-target="#timeCapsuleModalToggle2" data-bs-toggle="modal">
             <i class="arrow right"></i></button>
@@ -58,21 +62,19 @@
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
-          <h4>20XX.XX.XX X요일</h4>
+          <h4 class="created-date">(20XX.XX.XX X요일)</h4>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
           <button class="arrow-button" data-bs-target="#timeCapsuleModalToggle" data-bs-toggle="modal">
             <i class="arrow left"></i></button>
-          추억 내용 추억 내용 추억 내용 추억 내용 추억 내용 추억 내용 추억 내용 추억 내용 추억 내용 추억 내용 추억 내용 추억 내용
-          
+          <div class="capsule-content">추억 내용 추억 내용 추억 내용 추억 내용 추억 내용 추억 내용 추억 내용 추억 내용 추억 내용 추억 내용 추억 내용 추억 내용</div>
         </div>
-        
       </div>
     </div>
   </div>
-  
-    
+
+
   <script>
     let i = 0;
 
@@ -93,17 +95,17 @@
         capsuleContainerButton.style.marginBottom = '15px';
         capsuleContainerButton.style.cursor = 'pointer';
 
-        const capsuleContainer = document.createElement('span');
+        
 
         const capsule = document.createElement('img');
         capsule.src = `../../capsule${chosenImage}`;
         capsule.style.width = '100px';
-        
+        capsule.style.marginBottom = '10px';
         
         const createdDate = document.createTextNode('20XX.XX.XX');  // 작성 날짜 받아오기
+        
         capsuleContainerButton.appendChild(capsule);
         capsuleContainerButton.appendChild(createdDate);
-        capsuleContainerButton.appendChild(capsuleContainer);
         tabCon.appendChild(capsuleContainerButton);
 
         i = (i + 1) % 2;
