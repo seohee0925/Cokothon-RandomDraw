@@ -6,15 +6,40 @@
     <title>Document</title>
 </head>
 <body>
-    <form action="http://127.0.0.1:8000/accounts/login/" method="post">
+    <!-- <form action="http://127.0.0.1:8000/accounts/login/" method="post">
         <p><input type="text" name="email"></p>
         <p>
             <textarea name="name"></textarea>
         </p>
-        <!-- <p><input type="text" name="password"></p> -->
         <p>
             <input type="submit">
         </p>
-    </form>
+    </form> -->
+
+    <button onclick="sendToServer()">가자</button>
+
+    <script>
+        // Fetch API를 사용하여 서버에 데이터 전송
+        function sendToServer() {
+            fetch('http://127.0.0.1:8000/accounts/login/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: 
+                    JSON.stringify({
+                        email:"seo4306@kookmin.ac.kr",
+                        password:"1234"
+                    })
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('서버 응답: ', data);
+            })
+            .catch(error => {
+                console.error('서버로 전송하는 중 오류 발생: ', error);
+            });
+        }
+    </script>
 </body>
 </html>
