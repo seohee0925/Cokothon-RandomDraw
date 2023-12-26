@@ -2,16 +2,18 @@
 <html lang="ko">
   <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>내 추억 저장소</title>
     <link rel="stylesheet" href="../my_page.css">
   </head>
 
   <body>
-    <h1>내 추억 저장소</h1>
-    <div id="user-nickname">(별명)</div>
+  <h1>내 추억 저장소</h1>
+  <div id="user-nickname">(별명)</div>
     <div class="tabmenu out-tabmenu">
         <ul>
           <li id="tab1" class="btnCon"> 
+        
             <input type="radio" checked name="tabmenu" id="tabmenu1">
             <label for="tabmenu1">나의 추억</label>
             <div class="tabCon" >
@@ -32,7 +34,7 @@
         </ul>
       </div>
   
-
+    
   <script>
     let i = 0;
 
@@ -41,7 +43,7 @@
         const capsuleImages = ["1-locked.png", "2-locked.png"];
         const chosenImage = capsuleImages[i];
 
-
+        
         const capsuleContainer = document.createElement('span');
         capsuleContainer.style.display = 'inline-block';
         capsuleContainer.style.flexDirection = 'column';
@@ -50,6 +52,9 @@
         capsuleContainer.style.marginRight = '15px';
         capsuleContainer.style.marginBottom = '15px';
         capsuleContainer.style.cursor = 'pointer';
+        capsuleContainer.setAttribute('data-bs-toggle', 'tooltip');
+        capsuleContainer.setAttribute('data-bs-placement', 'bottom');
+        capsuleContainer.setAttribute('data-bs-title', 'Tooltip on bottom');
 
         const capsule = document.createElement('img');
         capsule.src = `../../capsule${chosenImage}`;
@@ -67,11 +72,10 @@
             tabCon.querySelector('.default-message').remove();
         }
     }
-    
-    
     // 사용자가 작성 페이지에서 추억을 작성하면(버튼을 클릭하면) 캡슐 생성
     document.getElementById('btn').addEventListener('click', createCapsule);
     
+
   </script>
 </body>
 </html>
