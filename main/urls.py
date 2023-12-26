@@ -3,11 +3,13 @@ from . import views
 
 from django.conf.urls.static import static
 from django.conf import settings
+from rest_framework.routers import DefaultRouter
+from .views import CapsuleViewSet
 
 app_name = 'main'
 
+
 urlpatterns = [
-    path('filter/', views.write_capsule, name='write_capsule'),
-    path('filter/<int:id>/', views.show_capsule, name='show_capsule'),
+    path('filter/', CapsuleViewSet.as_view(), name='write_capsule'),
+    path('filter/show/', views.show_capsule, name='show_capsule'),
 ]
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
