@@ -4,4 +4,4 @@ from .models import Capsule
 class CapsuleCreateForm(forms.ModelForm):
     class Meta:
         model = Capsule
-        fields = '__all__'
+        fields = ['content', 'picture', 'destination', 'open_date']

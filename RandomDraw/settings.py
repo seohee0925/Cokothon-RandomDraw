@@ -77,6 +77,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'RandomDraw.urls'
+ALLOWED_HOSTS = ['192.168.140.251', 'localhost', '127.0.0.1']
 
 TEMPLATES = [
     {
