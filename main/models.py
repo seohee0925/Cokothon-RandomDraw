@@ -5,6 +5,8 @@ class Capsule(models.Model):
     email = models.EmailField()
     content = models.TextField(verbose_name='내용')
     picture = models.TextField(verbose_name='사진')
+#     image = models.ImageField(default='media/default_image.jpeg', null=True)
+
     
     DESTINATION_CHOICES = [
         ("unknown", "익명"),
