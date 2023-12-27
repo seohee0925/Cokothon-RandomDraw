@@ -6,25 +6,27 @@ from .models import Capsule, picked_capsule
 import json, random
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse, HttpResponse
-from rest_framework.decorators import api_view, permission_classes
+# from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from .serializers import CapsuleSerializer
-
-@api_view(['POST'])
 # @permission_classes([IsAuthenticated])
+@csrf_exempt
 def write_capsule(request):
-    user_email = request.session['email']
-    user = Accounts.objects.get(email=user_email)
+    requestdata = json.loads(request.body.decode('utf-8'))
+    requestdata = json.loads(request.body)
+    print(requestdata)
 
-    serializer = CapsuleSerializer(data=request.data, files=request.FILES)
+    contentd = requestdata['content']
+    destionationd =  requestdata['destination']
+    open_dated = requestdata['open_date']
+
+    cap = Capsule(content = contentd, destination = destionationd, open_date = open_dated, picture = "fskjbkj", email = 'seo4306@kookmin.ac.kr', )
+    cap.save()
+
+    return JsonResponse({'result' : "success"}, json_dumps_params={'ensure_ascii': False}, content_type = 'application/json; charest=utf-8')
     
-    if serializer.is_valid():
-        serializer.save(user=user, email=user_email)
-        return Response(serializer.data)
-    
-    return Response(serializer.errors, status=400)
-    
+
     # if request.method == 'POST':
     #     form = CapsuleCreateForm(request.POST, request.FILES)
     #     if form.is_valid():
@@ -37,17 +39,17 @@ def write_capsule(request):
     #     form = CapsuleCreateForm()
     # return render(request, 'write_capsule.html', {'form': form})
 
-@login_required
-def show_capsule(request, id): # 사용자 제외 랜덤
-    if request.method == 'GET':
-        user_email = request.session['email']
-        user = Accounts.objects.get(email=user_email)
+@csrf_exempt
+def show_capsule(request): # 사용자 제외 랜덤
+    user_email = 'seo4306@kookmin.ac.kr'
+    # user = Accounts.objects.get(email=user_email)
 
-        capsules_exclude_user = Accounts.objects.exclude(user=user)
-        random_capsule = random.choice(capsules_exclude_user)
+    # capsules_exclude_user = Accounts.objects.exclude(user=user)
+    # random_capsule = random.choice(capsules_exclude_user)
 
-        return JsonResponse({'id' : random_capsule.id, 'content':random_capsule.content}, json_dumps_params={'ensure_ascii':False}, content_type = 'application/json; charest=utf-8')
-
+    Capsules = get_object_or_404(Capsule, id = 12)
+    return JsonResponse({'content':Capsules.content, 'date' : Capsules.write_date}, json_dumps_params={'ensure_ascii':False}, content_type = 'application/json; charest=utf-8')
+@csrf_exempt
 def show_all_picked_capsule(request):
     # user_email = request.session['email']
     user_email = 'seo4306@kookmin.ac.kr'
@@ -64,7 +66,7 @@ def show_all_picked_capsule(request):
     except:
         return JsonResponse({'result' : "fail"}, json_dumps_params={'ensure_ascii': False}, content_type = 'application/json; charest=utf-8')
     
-
+@csrf_exempt
 def show_all_my_capsule(request):
     # user_email = request.session['email']
     user_email = 'seo4306@kookmin.ac.kr'
@@ -82,5 +84,25 @@ def show_all_my_capsule(request):
         
     except:
         return JsonResponse({'result' : "fail"}, json_dumps_params={'ensure_ascii': False}, content_type = 'application/json; charest=utf-8')
-    
-# def modal(request):
+@csrf_exempt  
+def modal(request):
+    # requestdata = json.loads(request.body.decode('utf-8'))
+    # requestdata = json.loads(request.body)
+    # print(requestdata)
+
+
+    # wt = requestdata['index']
+    idi = 11
+    cap = get_object_or_404(Capsule, id = idi)
+
+    wd = cap.write_date
+    ct = cap.content
+
+    return JsonResponse({'time' : wd, 'content' : ct}, json_dumps_params={'ensure_ascii': False}, content_type = 'application/json; charest=utf-8')
+        
+
+
+
+
+
+
