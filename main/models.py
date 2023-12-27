@@ -4,7 +4,9 @@ from django.db import models
 class Capsule(models.Model):
     email = models.EmailField()
     content = models.TextField(verbose_name='내용')
-    image = models.ImageField(default='media/default_image.jpeg', null=True)
+    picture = models.TextField(verbose_name='사진')
+#     image = models.ImageField(default='media/default_image.jpeg', null=True)
+
     
     DESTINATION_CHOICES = [
         ("unknown", "익명"),
@@ -29,4 +31,4 @@ class picked_capsule(models.Model):
     info_write_date = models.DateTimeField()
     info_open_date = models.DateTimeField()
     info_content = models.TextField()
-    info_picture = models.ImageField()
+    info_picture = models.TextField()
